@@ -1,0 +1,47 @@
+       * {
+           padding: 0px;
+           margin: 0px;
+       }
+
+       .nav_bar ul li a {
+           color: black;
+       }
+
+       .nav_bar ul li i {
+           color: rgb(56, 93, 255);
+       }
+
+
+       .nav_bar ul li {
+           margin-top: 7px;
+       }
+
+
+
+       .data_info select {
+           color: rgb(156, 156, 156);
+           /* Default color */
+       }
+
+       .dropdown-menu-custom {
+           display: none;
+           margin-top: 5px;
+           /* Ensures it opens right below */
+       }
+
+       .dropdown-menu-custom.show {
+           display: block;
+       }
+
+
+       .men-profile:hover {
+           filter: brightness(50%);
+           transition: 0.3s ease-in-out;
+       }
+
+       /* Change .photo-icon when .men-profile is hovered */
+       #xxx:hover,
+       .men-profile:hover {
+           filter: sepia(50%) saturate(500%) hue-rotate(-10deg) brightness(90%);
+           transition: 0.3s ease-in-out;
+       }

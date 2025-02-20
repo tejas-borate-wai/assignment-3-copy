@@ -1,0 +1,2017 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+    <style>
+        /* Sidebar width on large screens */
+        #sidebar {
+            width: 270px;
+            height: 100vh;
+        }
+
+        /* Hide sidebar on small screens */
+        @media (max-width: 991px) {
+            #sidebar {
+                display: none;
+            }
+        }
+
+        /* Main content margin for large screens */
+        .main-content {
+            margin-left: 270px;
+        }
+
+        @media (max-width: 991px) {
+            .main-content {
+                margin-left: 0;
+            }
+
+            .main-content nav {
+                margin-left: -10px !important;
+            }
+
+            .x2 {
+                margin-top: 0px;
+            }
+
+            #mobileSidebar {
+                margin-top: 80px;
+            }
+
+            .x3 {
+                margin-top: -40px;
+            }
+
+            .x4 {
+                margin-top: -40px;
+            }
+
+            .x5-card {
+                margin-top: 40px;
+            }
+
+            .x10 {
+                margin-right: -50px;
+            }
+        }
+
+        .main-content nav {
+            margin-left: -270px;
+        }
+
+        .badge {
+            background-color: #eeadf8;
+            color: #6f00ff;
+        }
+
+        .span_badge:hover {
+            background-color: #e11eff;
+        }
+
+        .delete_button {
+            transition: filter 0.3s ease-in-out;
+        }
+
+        .delete_button img:hover {
+            filter: brightness(50%) sepia(80%) hue-rotate(-10deg) saturate(200%);
+            rotate: 20deg;
+        }
+
+        .pagination_tab ul li {
+            height: 30px;
+            width: 30px;
+            border-radius: 50%;
+            border: 1px solid black;
+            text-align: center;
+
+        }
+
+        .pagination_tab ul li a {
+            text-decoration: none;
+            margin-top: 200px !important;
+            color: black;
+
+        }
+
+        .edit_dlt_icon i {
+            font-size: 18px;
+        }
+
+        .card_section {
+            border: 2px solid rgb(168, 168, 168);
+            box-sizing: border-box;
+            border-radius: 5px;
+        }
+
+        b {
+            font-size: 13px;
+            font-weight: 700 !important;
+        }
+
+        .skills_card div img {
+            height: 30px;
+            width: 30px;
+        }
+
+        #myCheckbox {
+            transform: scale(1.4) !important;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="d-flex">
+
+        <!-- Sidebar (Hidden on small screens) -->
+        <nav id="sidebar" class="bg-light shadow-lg position-fixed d-lg-flex flex-column vh-100 pt-lg-4"
+            style="width: 250px;z-index: 55000;top: 80px;">
+
+            <ul class="nav flex-column px-3">
+                <li class="nav-item mt-1">
+                    <a class="nav-link d-flex align-items-center" href="#">
+                        <i class="bi bi-grid-1x2 me-2"></i> Dashboard
+                        <i class="bi bi-chevron-right ms-auto"></i>
+                    </a>
+                </li>
+                <li class="nav-item mt-1">
+                    <a class="nav-link d-flex align-items-center" href="#" id="teamDropdown">
+                        <i class="bi bi-person me-2"></i> Team Member
+                        <i class="bi bi-chevron-right ms-auto"></i>
+                    </a>
+                    <ul class="list-unstyled ms-4 collapse" id="teamDropdownMenu">
+                        <li class="nav-item">
+                            <a class="nav-link d-flex align-items-center" href="#">
+                                <i class="bi bi-person me-2"></i> Team Member
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link d-flex align-items-center" href="#">
+                                <i class="bi bi-award me-2"></i> Certification
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+
+                <li class="nav-item mt-1">
+                    <a class="nav-link d-flex align-items-center" href="#">
+                        <i class="bi bi-cast me-2"></i> Project
+                        <i class="bi bi-chevron-right ms-auto"></i>
+                    </a>
+                </li>
+                <li class="nav-item mt-1">
+                    <a class="nav-link d-flex align-items-center" href="#">
+                        <i class="bi bi-person-badge me-2"></i> Client
+                        <i class="bi bi-chevron-right ms-auto"></i>
+                    </a>
+                </li>
+                <li class="nav-item mt-1">
+                    <a class="nav-link d-flex align-items-center" href="#" id="learning_path_dropdown">
+                        <i class="bi bi-person me-2"></i> Learning Path
+                        <i class="bi bi-chevron-down ms-auto"></i>
+                    </a>
+                    <ul class="list-unstyled ms-4 collapse" id="learning_path_dropdownMenu">
+                        <li class="nav-item">
+                            <a class="nav-link d-flex align-items-center" href="#">
+                                <i class="bi bi-person me-2"></i> Learning Path
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link d-flex align-items-center" href="#">
+                                <i class="bi bi-award me-2"></i> Cources
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link d-flex align-items-center" href="#">
+                                <i class="bi bi-award me-2"></i> Skills Sets
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Main Content -->
+        <div class="container-fluid main-content p-0">
+            <!-- Top Navbar -->
+            <nav class="navbar navbar-expand-lg navbar-light bg-white shadow position-fixed w-100 x10"
+                style="height: 80px; z-index: 12000;">
+                <div class="container-fluid">
+                    <!-- Sidebar Toggle Button for Small Screens -->
+                    <button class="btn btn-outline-primary d-lg-none" type="button" data-bs-toggle="offcanvas"
+                        data-bs-target="#mobileSidebar">
+                        <i class="bi bi-list"></i>
+                    </button>
+
+                    <div class=" p-3 text-center d-none d-md-none d-lg-block">
+                        <img src="assets/logo.png" alt="Logo" class="" height="50" width="120px">
+                    </div>
+
+                    <div class="row w-100 align-items-center">
+                        <!-- Left Section: Page Title & Breadcrumbs -->
+                        <div class="col-1 col-lg-2 d-none d-md-block"></div>
+                        <div class="col-lg-4 col-md-6 col-12 d-none d-lg-block">
+                            <div class="d-flex flex-column d-none d-md-block" style="margin-left: -100px;">
+                                <h6 class="m-0 fw-bold">Skill Sets</h6>
+                                <p class="text-muted small m-0">Learning Path > Skill Sets
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4 col-md-6 col-12 d-block d-lg-none">
+
+                        </div>
+
+                        <!-- Right Section: Icons & User Profile -->
+                        <div class="col-2  d-md-none"></div>
+                        <div class="col-lg-6 col-md-4 col-10 d-flex justify-content-end align-items-center x2">
+                            <div class="x3">
+                                <img src="https://upload.wikimedia.org/wikipedia/en/a/a4/Flag_of_the_United_States.svg"
+                                    alt="Flag" width="24" height="16" class="me-2">
+                                <span class="me-3">EN(UK)</span>
+                                <i class="bi bi-bell me-3"></i>
+                                <i class="bi bi-gear me-3"></i>
+                            </div>
+
+                            <!-- User Profile -->
+                            <div class="x4">
+                                <div class="d-flex align-items-center">
+                                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRWoIK1UbwcOWwI6C6_rR6eKWDlOmNWq2w0P7h9RAuW8kqwg6Ku7pWf7blG&s=10"
+                                        alt="Admin" width="36" height="36" class="rounded-circle me-2">
+                                    <div>
+                                        <p class="m-0 fw-bold">Megan Roberts</p>
+                                        <p class="m-0 text-muted small">Admin</p>
+                                    </div>
+                                    <div class="dropdown">
+                                        <button class="btn border-0" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <i class="bi bi-arrow-down-circle-fill"></i>
+                                        </button>
+                                        <ul class="dropdown-menu"
+                                            style="margin-left: -130px;border: 2px solid gray;margin-top: 5px;">
+                                            <li><a class="dropdown-item" href="#">Profile</a></li>
+                                            <li><a class="dropdown-item" href="#">Settings</a></li>
+                                            <li><a class="dropdown-item" href="#">Logout</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+
+
+            <!-- Content Area -->
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12 custom-margin" style="margin-top: 80px;">
+                        <!-- Outer Card Section -->
+                        <div class="card bg-transparent mt-lg-4 p-3">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="row d-flex align-items-center">
+                                        <!-- Heading Section -->
+                                        <div class="col-12 col-md-3 col-lg-3 text-center text-md-start">
+                                            <label for="Skills" class="mb-1">Search Skills</label>
+                                            <input type="text" class="w-100 bg-light rounded" id="Skills"
+                                                placeholder="Search" style="border: 1px solid gray;">
+                                        </div>
+
+                                        <!-- Spacer for larger screens -->
+                                        <div class="d-none d-md-block col-md-3 col-lg-4"></div>
+
+                                        <!-- Buttons Section -->
+                                        <div
+                                            class="col-12 col-md-6 col-lg-5 d-flex justify-content-center justify-content-md-end justify-content-lg-end mt-2 mt-md-0">
+                                            <div>
+                                                <button type="button" class="btn btn-sm btn-outline-primary me-2"><i
+                                                        class="bi bi-trash"></i> DELETE</button>
+                                                <button type="button" class="btn btn-sm btn-primary me-2"><i
+                                                        class="bi bi-bookmark-plus"></i> CREATE NEW SKILLS</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Card Section row  -->
+
+
+                                <!-- Card Section row 1  -->
+                                <div class="row">
+
+                                    <!-- Card 1 -->
+                                    <div class="col-12 col-md-6 col-lg-4 col-xl-3 px-4 mb-2 py-2 each_card ">
+                                        <div class=" shadow-sm rounded">
+                                            <div class="row">
+                                                <div class="d-flex align-items-center card_section px-0 py-3">
+                                                    <div class="col-9">
+                                                        <div class="d-flex align-items-center">
+
+                                                            <div class="ms-3">
+                                                                <input type="checkbox" id="myCheckbox">
+                                                            </div>
+
+
+                                                            <div class="div ms-3">
+                                                                <img src="assets/github.png" alt="" height="30"
+                                                                    width="30">
+                                                            </div>
+
+
+                                                            <div class="ms-2">
+                                                                <b>Git</b>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- Icons Section -->
+                                                    <div class="col-3">
+                                                        <div
+                                                            class="d-flex align-items-center justify-content-end edit_dlt_icon">
+                                                            <div><i class="bi bi-trash me-2"
+                                                                    style="cursor: pointer;"></i></div>
+                                                            <div><i class="bi bi-pen me-2" style="cursor: pointer;"></i>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Card 2 -->
+                                    <div class="col-12 col-md-6 col-lg-4 col-xl-3 px-4 mb-2 py-2 each_card">
+                                        <div class=" shadow-sm rounded">
+                                            <div class="row">
+                                                <div class="d-flex align-items-center card_section px-0 py-3">
+                                                    <div class="col-9">
+                                                        <div class="d-flex align-items-center">
+
+                                                            <div class="ms-3">
+                                                                <input type="checkbox" id="myCheckbox">
+                                                            </div>
+
+
+                                                            <div class="div ms-3">
+                                                                <img src="assets/dotnet.png" alt="" height="40"
+                                                                    width="40">
+                                                            </div>
+
+
+                                                            <div class="ms-2">
+                                                                <b>DOT NET</b>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- Icons Section -->
+                                                    <div class="col-3">
+                                                        <div
+                                                            class="d-flex align-items-center justify-content-end edit_dlt_icon">
+                                                            <div><i class="bi bi-trash me-2"
+                                                                    style="cursor: pointer;"></i></div>
+                                                            <div><i class="bi bi-pen me-2" style="cursor: pointer;"></i>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Card 3 -->
+                                    <div class="col-12 col-md-6 col-lg-4 col-xl-3 px-4 mb-2 py-2 each_card">
+                                        <div class=" shadow-sm rounded">
+                                            <div class="row">
+                                                <div class="d-flex align-items-center card_section px-0 py-3">
+                                                    <div class="col-9">
+                                                        <div class="d-flex align-items-center">
+
+                                                            <div class="ms-3">
+                                                                <input type="checkbox" id="myCheckbox">
+                                                            </div>
+
+
+                                                            <div class="div ms-3">
+                                                                <img src="assets/c_sharp.png" alt="" height="40"
+                                                                    width="40">
+                                                            </div>
+
+                                                            <!-- Text section (C#) -->
+                                                            <div class="ms-2">
+                                                                <b>C#</b>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- Icons Section -->
+                                                    <div class="col-3">
+                                                        <div
+                                                            class="d-flex align-items-center justify-content-end edit_dlt_icon">
+                                                            <div><i class="bi bi-trash me-2"
+                                                                    style="cursor: pointer;"></i></div>
+                                                            <div><i class="bi bi-pen me-2" style="cursor: pointer;"></i>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Card 4 -->
+                                    <div class="col-12 col-md-6 col-lg-4 col-xl-3 px-4 mb-2 py-2 each_card">
+                                        <div class=" shadow-sm rounded">
+                                            <div class="row">
+                                                <div
+                                                    class="d-flex align-items-center flex-wrap text-wrap card_section px-0 py-3">
+                                                    <div class="col-9">
+                                                        <div class="d-flex align-items-center">
+
+                                                            <div class="ms-3">
+                                                                <input type="checkbox" id="myCheckbox">
+                                                            </div>
+
+
+
+
+                                                            <div class="div ms-3">
+                                                                <img src="assets/js.png" alt="" height="40" width="40">
+                                                            </div>
+
+                                                            <!-- Text section (Java Script) -->
+                                                            <div class="ms-2">
+                                                                <b>Java Script</b>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- Icons Section -->
+                                                    <div class="col-3">
+                                                        <div
+                                                            class="d-flex align-items-center justify-content-end edit_dlt_icon">
+                                                            <div><i class="bi bi-trash me-2"
+                                                                    style="cursor: pointer;"></i></div>
+                                                            <div><i class="bi bi-pen me-2" style="cursor: pointer;"></i>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Card Section row 2  -->
+                                <div class="row">
+                                    <div class="col-12 col-md-6 col-lg-4 col-xl-3 px-4 mb-2 py-2 each_card">
+                                        <div class=" shadow-sm rounded">
+                                            <div class="row">
+                                                <div
+                                                    class="d-flex align-items-center flex-wrap text-wrap card_section px-0 py-3">
+                                                    <div class="col-9">
+                                                        <div class="d-flex align-items-center">
+
+                                                            <div class="ms-3">
+                                                                <input type="checkbox" id="myCheckbox">
+                                                            </div>
+
+
+
+
+                                                            <div class="div ms-3">
+                                                                <img src="assets/html.png" alt="" height="40"
+                                                                    width="40">
+                                                            </div>
+
+                                                            <!-- Text section (Java Script) -->
+                                                            <div class="ms-2">
+                                                                <b>HTML</b>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- Icons Section -->
+                                                    <div class="col-3">
+                                                        <div
+                                                            class="d-flex align-items-center justify-content-end edit_dlt_icon">
+                                                            <div><i class="bi bi-trash me-2"
+                                                                    style="cursor: pointer;"></i></div>
+                                                            <div><i class="bi bi-pen me-2" style="cursor: pointer;"></i>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-12 col-md-6 col-lg-4 col-xl-3 px-4 mb-2 py-2 each_card">
+                                        <div class=" shadow-sm rounded">
+                                            <div class="row">
+                                                <div
+                                                    class="d-flex align-items-center flex-wrap text-wrap card_section px-0 py-3">
+                                                    <div class="col-9">
+                                                        <div class="d-flex align-items-center">
+
+                                                            <div class="ms-3">
+                                                                <input type="checkbox" id="myCheckbox">
+                                                            </div>
+
+
+
+
+                                                            <div class="div ms-3">
+                                                                <img src="assets/CSS-Logo.png" alt="" height="40"
+                                                                    width="40">
+                                                            </div>
+
+                                                            <!-- Text section (Java Script) -->
+                                                            <div class="ms-2">
+                                                                <b>CSS</b>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- Icons Section -->
+                                                    <div class="col-3">
+                                                        <div
+                                                            class="d-flex align-items-center justify-content-end edit_dlt_icon">
+                                                            <div><i class="bi bi-trash me-2"
+                                                                    style="cursor: pointer;"></i></div>
+                                                            <div><i class="bi bi-pen me-2" style="cursor: pointer;"></i>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-12 col-md-6 col-lg-4 col-xl-3 px-4 mb-2 py-2 each_card">
+                                        <div class=" shadow-sm rounded">
+                                            <div class="row">
+                                                <div
+                                                    class="d-flex align-items-center flex-wrap text-wrap card_section px-0 py-3">
+                                                    <div class="col-9">
+                                                        <div class="d-flex align-items-center">
+
+                                                            <div class="ms-3">
+                                                                <input type="checkbox" id="myCheckbox">
+                                                            </div>
+
+
+
+
+                                                            <div class="div ms-3">
+                                                                <img src="assets/python.png" alt="" height="40"
+                                                                    width="40">
+                                                            </div>
+
+                                                            <!-- Text section (Java Script) -->
+                                                            <div class="ms-2">
+                                                                <b>PYTHON</b>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- Icons Section -->
+                                                    <div class="col-3">
+                                                        <div
+                                                            class="d-flex align-items-center justify-content-end edit_dlt_icon">
+                                                            <div><i class="bi bi-trash me-2"
+                                                                    style="cursor: pointer;"></i></div>
+                                                            <div><i class="bi bi-pen me-2" style="cursor: pointer;"></i>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12 col-md-6 col-lg-4 col-xl-3 px-4 mb-2 py-2 each_card">
+                                        <div class=" shadow-sm rounded">
+                                            <div class="row">
+                                                <div
+                                                    class="d-flex align-items-center flex-wrap text-wrap card_section px-0 py-3">
+                                                    <div class="col-9">
+                                                        <div class="d-flex align-items-center">
+
+                                                            <div class="ms-3">
+                                                                <input type="checkbox" id="myCheckbox">
+                                                            </div>
+
+
+
+
+                                                            <div class="div ms-3">
+                                                                <img src="assets/java.png" alt="" height="40"
+                                                                    width="40">
+                                                            </div>
+
+                                                            <!-- Text section (Java Script) -->
+                                                            <div class="ms-2">
+                                                                <b>JAVA</b>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- Icons Section -->
+                                                    <div class="col-3">
+                                                        <div
+                                                            class="d-flex align-items-center justify-content-end edit_dlt_icon">
+                                                            <div><i class="bi bi-trash me-2"
+                                                                    style="cursor: pointer;"></i></div>
+                                                            <div><i class="bi bi-pen me-2" style="cursor: pointer;"></i>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <!-- Card Section row 3  -->
+                                <div class="row">
+                                    <div class="col-12 col-md-6 col-lg-4 col-xl-3 px-4 mb-2 py-2 each_card">
+                                        <div class=" shadow-sm rounded">
+                                            <div class="row">
+                                                <div
+                                                    class="d-flex align-items-center flex-wrap text-wrap card_section px-0 py-3">
+                                                    <div class="col-9">
+                                                        <div class="d-flex align-items-center">
+
+                                                            <div class="ms-3">
+                                                                <input type="checkbox" id="myCheckbox">
+                                                            </div>
+
+
+
+
+                                                            <div class="div ms-3">
+                                                                <img src="assets/bootstrap.png" alt="" height="40"
+                                                                    width="40">
+                                                            </div>
+
+                                                            <!-- Text section (Java Script) -->
+                                                            <div class="ms-2">
+                                                                <b>BOOTSTRAP</b>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- Icons Section -->
+                                                    <div class="col-3">
+                                                        <div
+                                                            class="d-flex align-items-center justify-content-end edit_dlt_icon">
+                                                            <div><i class="bi bi-trash me-2"
+                                                                    style="cursor: pointer;"></i></div>
+                                                            <div><i class="bi bi-pen me-2" style="cursor: pointer;"></i>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12 col-md-6 col-lg-4 col-xl-3 px-4 mb-2 py-2 each_card">
+                                        <div class=" shadow-sm rounded">
+                                            <div class="row">
+                                                <div
+                                                    class="d-flex align-items-center flex-wrap text-wrap card_section px-0 py-3">
+                                                    <div class="col-9">
+                                                        <div class="d-flex align-items-center">
+
+                                                            <div class="ms-3">
+                                                                <input type="checkbox" id="myCheckbox">
+                                                            </div>
+
+
+
+
+                                                            <div class="div ms-3">
+                                                                <img src="assets/react.png" alt="" height="40"
+                                                                    width="40">
+                                                            </div>
+
+                                                            <!-- Text section (Java Script) -->
+                                                            <div class="ms-2">
+                                                                <b>REACT</b>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- Icons Section -->
+                                                    <div class="col-3">
+                                                        <div
+                                                            class="d-flex align-items-center justify-content-end edit_dlt_icon">
+                                                            <div><i class="bi bi-trash me-2"
+                                                                    style="cursor: pointer;"></i></div>
+                                                            <div><i class="bi bi-pen me-2" style="cursor: pointer;"></i>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-12 col-md-6 col-lg-4 col-xl-3 px-4 mb-2 py-2 each_card">
+                                        <div class=" shadow-sm rounded">
+                                            <div class="row">
+                                                <div
+                                                    class="d-flex align-items-center flex-wrap text-wrap card_section px-0 py-3">
+                                                    <div class="col-9">
+                                                        <div class="d-flex align-items-center">
+
+                                                            <div class="ms-3">
+                                                                <input type="checkbox" id="myCheckbox">
+                                                            </div>
+
+
+
+
+                                                            <div class="div ms-3">
+                                                                <img src="assets/typescript.png" alt="" height="40"
+                                                                    width="40">
+                                                            </div>
+
+                                                            <!-- Text section (Java Script) -->
+                                                            <div class="ms-2">
+                                                                <b>Type Script</b>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- Icons Section -->
+                                                    <div class="col-3">
+                                                        <div
+                                                            class="d-flex align-items-center justify-content-end edit_dlt_icon">
+                                                            <div><i class="bi bi-trash me-2"
+                                                                    style="cursor: pointer;"></i></div>
+                                                            <div><i class="bi bi-pen me-2" style="cursor: pointer;"></i>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-12 col-md-6 col-lg-4 col-xl-3 px-4 mb-2 py-2 each_card">
+                                        <div class=" shadow-sm rounded">
+                                            <div class="row">
+                                                <div
+                                                    class="d-flex align-items-center flex-wrap text-wrap card_section px-0 py-3">
+                                                    <div class="col-9">
+                                                        <div class="d-flex align-items-center">
+
+                                                            <div class="ms-3">
+                                                                <input type="checkbox" id="myCheckbox">
+                                                            </div>
+
+
+
+
+                                                            <div class="div ms-3">
+                                                                <img src="assets/angular.png" alt="" height="40"
+                                                                    width="40">
+                                                            </div>
+
+                                                            <!-- Text section (Java Script) -->
+                                                            <div class="ms-2">
+                                                                <b>Angular JS</b>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- Icons Section -->
+                                                    <div class="col-3">
+                                                        <div
+                                                            class="d-flex align-items-center justify-content-end edit_dlt_icon">
+                                                            <div><i class="bi bi-trash me-2"
+                                                                    style="cursor: pointer;"></i></div>
+                                                            <div><i class="bi bi-pen me-2" style="cursor: pointer;"></i>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Card Section row 4  -->
+                                <div class="row">
+                                    <div class="col-12 col-md-6 col-lg-4 col-xl-3 px-4 mb-2 py-2 each_card">
+                                        <div class=" shadow-sm rounded">
+                                            <div class="row">
+                                                <div
+                                                    class="d-flex align-items-center flex-wrap text-wrap card_section px-0 py-3">
+                                                    <div class="col-9">
+                                                        <div class="d-flex align-items-center">
+
+                                                            <div class="ms-3">
+                                                                <input type="checkbox" id="myCheckbox">
+                                                            </div>
+
+
+
+
+                                                            <div class="div ms-3">
+                                                                <img src="assets/node.png" alt="" height="40"
+                                                                    width="40">
+                                                            </div>
+
+                                                            <!-- Text section (Java Script) -->
+                                                            <div class="ms-2">
+                                                                <b>Node.JS</b>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- Icons Section -->
+                                                    <div class="col-3">
+                                                        <div
+                                                            class="d-flex align-items-center justify-content-end edit_dlt_icon">
+                                                            <div><i class="bi bi-trash me-2"
+                                                                    style="cursor: pointer;"></i></div>
+                                                            <div><i class="bi bi-pen me-2" style="cursor: pointer;"></i>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-12 col-md-6 col-lg-4 col-xl-3 px-4 mb-2 py-2 each_card">
+                                        <div class=" shadow-sm rounded">
+                                            <div class="row">
+                                                <div
+                                                    class="d-flex align-items-center flex-wrap text-wrap card_section px-0 py-3">
+                                                    <div class="col-9">
+                                                        <div class="d-flex align-items-center">
+
+                                                            <div class="ms-3">
+                                                                <input type="checkbox" id="myCheckbox">
+                                                            </div>
+
+
+
+
+                                                            <div class="div ms-3">
+                                                                <img src="assets/machine_learning.png" alt=""
+                                                                    height="40" width="40">
+                                                            </div>
+
+                                                            <!-- Text section (Java Script) -->
+                                                            <div class="ms-2">
+                                                                <b>Machine Learning</b>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- Icons Section -->
+                                                    <div class="col-3">
+                                                        <div
+                                                            class="d-flex align-items-center justify-content-end edit_dlt_icon">
+                                                            <div><i class="bi bi-trash me-2"
+                                                                    style="cursor: pointer;"></i></div>
+                                                            <div><i class="bi bi-pen me-2" style="cursor: pointer;"></i>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12 col-md-6 col-lg-4 col-xl-3 px-4 mb-2 py-2 each_card">
+                                        <div class=" shadow-sm rounded">
+                                            <div class="row">
+                                                <div
+                                                    class="d-flex align-items-center flex-wrap text-wrap card_section px-0 py-3">
+                                                    <div class="col-9">
+                                                        <div class="d-flex align-items-center">
+
+                                                            <div class="ms-3">
+                                                                <input type="checkbox" id="myCheckbox">
+                                                            </div>
+
+
+
+
+                                                            <div class="div ms-3">
+                                                                <img src="assets/artificial.png" alt="" height="40"
+                                                                    width="40">
+                                                            </div>
+
+                                                            <!-- Text section (Java Script) -->
+                                                            <div class="ms-2">
+                                                                <b>Artificial Inteligence</b>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- Icons Section -->
+                                                    <div class="col-3">
+                                                        <div
+                                                            class="d-flex align-items-center justify-content-end edit_dlt_icon">
+                                                            <div><i class="bi bi-trash me-2"
+                                                                    style="cursor: pointer;"></i></div>
+                                                            <div><i class="bi bi-pen me-2" style="cursor: pointer;"></i>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12 col-md-6 col-lg-4 col-xl-3 px-4 mb-2 py-2 each_card">
+                                        <div class=" shadow-sm rounded">
+                                            <div class="row">
+                                                <div
+                                                    class="d-flex align-items-center flex-wrap text-wrap card_section px-0 py-3">
+                                                    <div class="col-9">
+                                                        <div class="d-flex align-items-center">
+
+                                                            <div class="ms-3">
+                                                                <input type="checkbox" id="myCheckbox">
+                                                            </div>
+
+
+
+
+                                                            <div class="div ms-3">
+                                                                <img src="assets/Deep-Learning.png" alt="" height="40"
+                                                                    width="40">
+                                                            </div>
+
+                                                            <!-- Text section (Java Script) -->
+                                                            <div class="ms-2">
+                                                                <b>Deep Learning</b>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- Icons Section -->
+                                                    <div class="col-3">
+                                                        <div
+                                                            class="d-flex align-items-center justify-content-end edit_dlt_icon">
+                                                            <div><i class="bi bi-trash me-2"
+                                                                    style="cursor: pointer;"></i></div>
+                                                            <div><i class="bi bi-pen me-2" style="cursor: pointer;"></i>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Card Section row 5  -->
+                                <div class="row">
+                                    <div class="col-12 col-md-6 col-lg-4 col-xl-3 px-4 mb-2 py-2 each_card">
+                                        <div class=" shadow-sm rounded">
+                                            <div class="row">
+                                                <div
+                                                    class="d-flex align-items-center flex-wrap text-wrap card_section px-0 py-3">
+                                                    <div class="col-9">
+                                                        <div class="d-flex align-items-center">
+
+                                                            <div class="ms-3">
+                                                                <input type="checkbox" id="myCheckbox">
+                                                            </div>
+
+
+
+
+                                                            <div class="div ms-3">
+                                                                <img src="assets/data-analysis.png" alt="" height="40"
+                                                                    width="40">
+                                                            </div>
+
+                                                            <!-- Text section (Java Script) -->
+                                                            <div class="ms-2">
+                                                                <b>Data Analysis</b>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- Icons Section -->
+                                                    <div class="col-3">
+                                                        <div
+                                                            class="d-flex align-items-center justify-content-end edit_dlt_icon">
+                                                            <div><i class="bi bi-trash me-2"
+                                                                    style="cursor: pointer;"></i></div>
+                                                            <div><i class="bi bi-pen me-2" style="cursor: pointer;"></i>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12 col-md-6 col-lg-4 col-xl-3 px-4 mb-2 py-2 each_card">
+                                        <div class=" shadow-sm rounded">
+                                            <div class="row">
+                                                <div
+                                                    class="d-flex align-items-center flex-wrap text-wrap card_section px-0 py-3">
+                                                    <div class="col-9">
+                                                        <div class="d-flex align-items-center">
+
+                                                            <div class="ms-3">
+                                                                <input type="checkbox" id="myCheckbox">
+                                                            </div>
+
+
+
+
+                                                            <div class="div ms-3">
+                                                                <img src="assets/sql.png" alt="" height="40" width="40">
+                                                            </div>
+
+                                                            <!-- Text section (Java Script) -->
+                                                            <div class="ms-2">
+                                                                <b>SQL</b>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- Icons Section -->
+                                                    <div class="col-3">
+                                                        <div
+                                                            class="d-flex align-items-center justify-content-end edit_dlt_icon">
+                                                            <div><i class="bi bi-trash me-2"
+                                                                    style="cursor: pointer;"></i></div>
+                                                            <div><i class="bi bi-pen me-2" style="cursor: pointer;"></i>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-12 col-md-6 col-lg-4 col-xl-3 px-4 mb-2 py-2 each_card">
+                                        <div class=" shadow-sm rounded">
+                                            <div class="row">
+                                                <div
+                                                    class="d-flex align-items-center flex-wrap text-wrap card_section px-0 py-3">
+                                                    <div class="col-9">
+                                                        <div class="d-flex align-items-center">
+
+                                                            <div class="ms-3">
+                                                                <input type="checkbox" id="myCheckbox">
+                                                            </div>
+
+
+
+
+                                                            <div class="div ms-3">
+                                                                <img src="assets/mysql_.png" alt="" height="40"
+                                                                    width="40">
+                                                            </div>
+
+                                                            <!-- Text section (Java Script) -->
+                                                            <div class="ms-2">
+                                                                <b>MySql</b>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- Icons Section -->
+                                                    <div class="col-3">
+                                                        <div
+                                                            class="d-flex align-items-center justify-content-end edit_dlt_icon">
+                                                            <div><i class="bi bi-trash me-2"
+                                                                    style="cursor: pointer;"></i></div>
+                                                            <div><i class="bi bi-pen me-2" style="cursor: pointer;"></i>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-12 col-md-6 col-lg-4 col-xl-3 px-4 mb-2 py-2 each_card">
+                                        <div class=" shadow-sm rounded">
+                                            <div class="row">
+                                                <div
+                                                    class="d-flex align-items-center flex-wrap text-wrap card_section px-0 py-2">
+                                                    <div class="col-9">
+                                                        <div class="d-flex align-items-center">
+
+                                                            <div class="ms-3">
+                                                                <input type="checkbox" id="myCheckbox">
+                                                            </div>
+
+
+
+
+                                                            <div class="div ms-3">
+                                                                <img src="assets/database-management.jpg" alt=""
+                                                                    height="40" width="40">
+                                                            </div>
+
+                                                            <!-- Text section (Java Script) -->
+                                                            <div class="ms-2">
+                                                                <b>Database Management</b>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- Icons Section -->
+                                                    <div class="col-3">
+                                                        <div
+                                                            class="d-flex align-items-center justify-content-end edit_dlt_icon">
+                                                            <div><i class="bi bi-trash me-2"
+                                                                    style="cursor: pointer;"></i></div>
+                                                            <div><i class="bi bi-pen me-2" style="cursor: pointer;"></i>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Card Section row 6  -->
+                                <div class="row">
+                                    <div class="col-12 col-md-6 col-lg-4 col-xl-3 px-4 mb-2 py-2 each_card">
+                                        <div class=" shadow-sm rounded">
+                                            <div class="row">
+                                                <div
+                                                    class="d-flex align-items-center flex-wrap text-wrap card_section px-0 py-3">
+                                                    <div class="col-9">
+                                                        <div class="d-flex align-items-center">
+
+                                                            <div class="ms-3">
+                                                                <input type="checkbox" id="myCheckbox">
+                                                            </div>
+
+
+
+
+                                                            <div class="div ms-3">
+                                                                <img src="assets/mongodb.png" alt="" height="40"
+                                                                    width="40">
+                                                            </div>
+
+                                                            <!-- Text section (Java Script) -->
+                                                            <div class="ms-2">
+                                                                <b>MongoDB</b>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- Icons Section -->
+                                                    <div class="col-3">
+                                                        <div
+                                                            class="d-flex align-items-center justify-content-end edit_dlt_icon">
+                                                            <div><i class="bi bi-trash me-2"
+                                                                    style="cursor: pointer;"></i></div>
+                                                            <div><i class="bi bi-pen me-2" style="cursor: pointer;"></i>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-12 col-md-6 col-lg-4 col-xl-3 px-4 mb-2 py-2 each_card">
+                                        <div class=" shadow-sm rounded">
+                                            <div class="row">
+                                                <div
+                                                    class="d-flex align-items-center flex-wrap text-wrap card_section px-0 py-3">
+                                                    <div class="col-9">
+                                                        <div class="d-flex align-items-center">
+
+                                                            <div class="ms-3">
+                                                                <input type="checkbox" id="myCheckbox">
+                                                            </div>
+
+
+
+
+                                                            <div class="div ms-3">
+                                                                <img src="assets/sql-server.png" alt="" height="40"
+                                                                    width="40">
+                                                            </div>
+
+                                                            <!-- Text section (Java Script) -->
+                                                            <div class="ms-2">
+                                                                <b>SQL Server</b>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- Icons Section -->
+                                                    <div class="col-3">
+                                                        <div
+                                                            class="d-flex align-items-center justify-content-end edit_dlt_icon">
+                                                            <div><i class="bi bi-trash me-2"
+                                                                    style="cursor: pointer;"></i></div>
+                                                            <div><i class="bi bi-pen me-2" style="cursor: pointer;"></i>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-12 col-md-6 col-lg-4 col-xl-3 px-4 mb-2 py-2 each_card">
+                                        <div class=" shadow-sm rounded">
+                                            <div class="row">
+                                                <div
+                                                    class="d-flex align-items-center flex-wrap text-wrap card_section px-0 py-3">
+                                                    <div class="col-9">
+                                                        <div class="d-flex align-items-center">
+
+                                                            <div class="ms-3">
+                                                                <input type="checkbox" id="myCheckbox">
+                                                            </div>
+
+
+
+
+                                                            <div class="div ms-3">
+                                                                <img src="assets/apache-kafka.jpg" alt="" height="40"
+                                                                    width="40">
+                                                            </div>
+
+                                                            <!-- Text section (Java Script) -->
+                                                            <div class="ms-2">
+                                                                <b>Apache Kafka</b>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- Icons Section -->
+                                                    <div class="col-3">
+                                                        <div
+                                                            class="d-flex align-items-center justify-content-end edit_dlt_icon">
+                                                            <div><i class="bi bi-trash me-2"
+                                                                    style="cursor: pointer;"></i></div>
+                                                            <div><i class="bi bi-pen me-2" style="cursor: pointer;"></i>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12 col-md-6 col-lg-4 col-xl-3 px-4 mb-2 py-2 each_card">
+                                        <div class=" shadow-sm rounded">
+                                            <div class="row">
+                                                <div
+                                                    class="d-flex align-items-center flex-wrap text-wrap card_section px-0 py-3">
+                                                    <div class="col-9">
+                                                        <div class="d-flex align-items-center">
+
+                                                            <div class="ms-3">
+                                                                <input type="checkbox" id="myCheckbox">
+                                                            </div>
+
+
+
+
+                                                            <div class="div ms-3">
+                                                                <img src="assets/postgresql.png" alt="" height="40"
+                                                                    width="40">
+                                                            </div>
+
+                                                            <!-- Text section (Java Script) -->
+                                                            <div class="ms-2">
+                                                                <b>Postgresql</b>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- Icons Section -->
+                                                    <div class="col-3">
+                                                        <div
+                                                            class="d-flex align-items-center justify-content-end edit_dlt_icon">
+                                                            <div><i class="bi bi-trash me-2"
+                                                                    style="cursor: pointer;"></i></div>
+                                                            <div><i class="bi bi-pen me-2" style="cursor: pointer;"></i>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Card Section row 7  -->
+                                <div class="row">
+                                    <div class="col-12 col-md-6 col-lg-4 col-xl-3 px-4 mb-2 py-2 each_card">
+                                        <div class=" shadow-sm rounded">
+                                            <div class="row">
+                                                <div
+                                                    class="d-flex align-items-center flex-wrap text-wrap card_section px-0 py-3">
+                                                    <div class="col-9">
+                                                        <div class="d-flex align-items-center">
+
+                                                            <div class="ms-3">
+                                                                <input type="checkbox" id="myCheckbox">
+                                                            </div>
+
+
+
+
+                                                            <div class="div ms-3">
+                                                                <img src="assets/oracle_sql.png" alt="" height="40"
+                                                                    width="40">
+                                                            </div>
+
+                                                            <!-- Text section (Java Script) -->
+                                                            <div class="ms-2">
+                                                                <b>Oracle SQL</b>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- Icons Section -->
+                                                    <div class="col-3">
+                                                        <div
+                                                            class="d-flex align-items-center justify-content-end edit_dlt_icon">
+                                                            <div><i class="bi bi-trash me-2"
+                                                                    style="cursor: pointer;"></i></div>
+                                                            <div><i class="bi bi-pen me-2" style="cursor: pointer;"></i>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12 col-md-6 col-lg-4 col-xl-3 px-4 mb-2 py-2 each_card">
+                                        <div class=" shadow-sm rounded">
+                                            <div class="row">
+                                                <div
+                                                    class="d-flex align-items-center flex-wrap text-wrap card_section px-0 py-3">
+                                                    <div class="col-9">
+                                                        <div class="d-flex align-items-center">
+
+                                                            <div class="ms-3">
+                                                                <input type="checkbox" id="myCheckbox">
+                                                            </div>
+
+
+
+
+                                                            <div class="div ms-3">
+                                                                <img src="assets/Docker-Symbol.png" alt="" height="40"
+                                                                    width="40">
+                                                            </div>
+
+                                                            <!-- Text section (Java Script) -->
+                                                            <div class="ms-2">
+                                                                <b>Docker</b>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- Icons Section -->
+                                                    <div class="col-3">
+                                                        <div
+                                                            class="d-flex align-items-center justify-content-end edit_dlt_icon">
+                                                            <div><i class="bi bi-trash me-2"
+                                                                    style="cursor: pointer;"></i></div>
+                                                            <div><i class="bi bi-pen me-2" style="cursor: pointer;"></i>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12 col-md-6 col-lg-4 col-xl-3 px-4 mb-2 py-2 each_card">
+                                        <div class=" shadow-sm rounded">
+                                            <div class="row">
+                                                <div
+                                                    class="d-flex align-items-center flex-wrap text-wrap card_section px-0 py-3">
+                                                    <div class="col-9">
+                                                        <div class="d-flex align-items-center">
+
+                                                            <div class="ms-3">
+                                                                <input type="checkbox" id="myCheckbox">
+                                                            </div>
+
+
+
+
+                                                            <div class="div ms-3">
+                                                                <img src="assets/kubernets.png" alt="" height="40"
+                                                                    width="40">
+                                                            </div>
+
+                                                            <!-- Text section (Java Script) -->
+                                                            <div class="ms-2">
+                                                                <b>kubernets</b>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- Icons Section -->
+                                                    <div class="col-3">
+                                                        <div
+                                                            class="d-flex align-items-center justify-content-end edit_dlt_icon">
+                                                            <div><i class="bi bi-trash me-2"
+                                                                    style="cursor: pointer;"></i></div>
+                                                            <div><i class="bi bi-pen me-2" style="cursor: pointer;"></i>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12 col-md-6 col-lg-4 col-xl-3 px-4 mb-2 py-2 each_card">
+                                        <div class=" shadow-sm rounded">
+                                            <div class="row">
+                                                <div
+                                                    class="d-flex align-items-center flex-wrap text-wrap card_section px-0 py-3">
+                                                    <div class="col-9">
+                                                        <div class="d-flex align-items-center">
+
+                                                            <div class="ms-3">
+                                                                <input type="checkbox" id="myCheckbox">
+                                                            </div>
+
+
+
+
+                                                            <div class="div ms-3">
+                                                                <img src="assets/jira.png" alt="" height="40"
+                                                                    width="40">
+                                                            </div>
+
+                                                            <!-- Text section (Java Script) -->
+                                                            <div class="ms-2">
+                                                                <b>Jira</b>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- Icons Section -->
+                                                    <div class="col-3">
+                                                        <div
+                                                            class="d-flex align-items-center justify-content-end edit_dlt_icon">
+                                                            <div><i class="bi bi-trash me-2"
+                                                                    style="cursor: pointer;"></i></div>
+                                                            <div><i class="bi bi-pen me-2" style="cursor: pointer;"></i>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Card Section row 8  -->
+                                <div class="row">
+                                    <div class="col-12 col-md-6 col-lg-4 col-xl-3 px-4 mb-2 py-2 each_card">
+                                        <div class=" shadow-sm rounded">
+                                            <div class="row">
+                                                <div
+                                                    class="d-flex align-items-center flex-wrap text-wrap card_section px-0 py-3">
+                                                    <div class="col-9">
+                                                        <div class="d-flex align-items-center">
+
+                                                            <div class="ms-3">
+                                                                <input type="checkbox" id="myCheckbox">
+                                                            </div>
+
+
+
+
+                                                            <div class="div ms-3">
+                                                                <img src="assets/API.jpg" alt="" height="40" width="40">
+                                                            </div>
+
+                                                            <!-- Text section (Java Script) -->
+                                                            <div class="ms-2">
+                                                                <b>API Testing</b>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- Icons Section -->
+                                                    <div class="col-3">
+                                                        <div
+                                                            class="d-flex align-items-center justify-content-end edit_dlt_icon">
+                                                            <div><i class="bi bi-trash me-2"
+                                                                    style="cursor: pointer;"></i></div>
+                                                            <div><i class="bi bi-pen me-2" style="cursor: pointer;"></i>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12 col-md-6 col-lg-4 col-xl-3 px-4 mb-2 py-2 each_card">
+                                        <div class=" shadow-sm rounded">
+                                            <div class="row">
+                                                <div
+                                                    class="d-flex align-items-center flex-wrap text-wrap card_section px-0 py-2">
+                                                    <div class="col-9">
+                                                        <div class="d-flex align-items-center">
+
+                                                            <div class="ms-3">
+                                                                <input type="checkbox" id="myCheckbox">
+                                                            </div>
+
+
+
+
+                                                            <div class="div ms-3">
+                                                                <img src="assets/Database-programming-2.png.webp" alt=""
+                                                                    height="40" width="40">
+                                                            </div>
+
+                                                            <!-- Text section (Java Script) -->
+                                                            <div class="ms-2">
+                                                                <b>Database Programming</b>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- Icons Section -->
+                                                    <div class="col-3">
+                                                        <div
+                                                            class="d-flex align-items-center justify-content-end edit_dlt_icon">
+                                                            <div><i class="bi bi-trash me-2"
+                                                                    style="cursor: pointer;"></i></div>
+                                                            <div><i class="bi bi-pen me-2" style="cursor: pointer;"></i>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12 col-md-6 col-lg-4 col-xl-3 px-4 mb-2 py-2 each_card">
+                                        <div class=" shadow-sm rounded">
+                                            <div class="row">
+                                                <div
+                                                    class="d-flex align-items-center flex-wrap text-wrap card_section px-0 py-3">
+                                                    <div class="col-9">
+                                                        <div class="d-flex align-items-center">
+
+                                                            <div class="ms-3">
+                                                                <input type="checkbox" id="myCheckbox">
+                                                            </div>
+
+
+
+
+                                                            <div class="div ms-3">
+                                                                <img src="assets/cypress.png" alt="" height="40"
+                                                                    width="40">
+                                                            </div>
+
+                                                            <!-- Text section (Java Script) -->
+                                                            <div class="ms-2">
+                                                                <b>Cypress.io</b>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- Icons Section -->
+                                                    <div class="col-3">
+                                                        <div
+                                                            class="d-flex align-items-center justify-content-end edit_dlt_icon">
+                                                            <div><i class="bi bi-trash me-2"
+                                                                    style="cursor: pointer;"></i></div>
+                                                            <div><i class="bi bi-pen me-2" style="cursor: pointer;"></i>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12 col-md-6 col-lg-4 col-xl-3 px-4 mb-2 py-2 each_card">
+                                        <div class=" shadow-sm rounded">
+                                            <div class="row">
+                                                <div
+                                                    class="d-flex align-items-center flex-wrap text-wrap card_section px-0 py-3">
+                                                    <div class="col-9">
+                                                        <div class="d-flex align-items-center">
+
+                                                            <div class="ms-3">
+                                                                <input type="checkbox" id="myCheckbox">
+                                                            </div>
+
+
+
+
+                                                            <div class="div ms-3">
+                                                                <img src="assets/Automation-Testing.jpg" alt=""
+                                                                    height="40" width="40">
+                                                            </div>
+
+                                                            <!-- Text section (Java Script) -->
+                                                            <div class="ms-2">
+                                                                <b>Automation Testing</b>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- Icons Section -->
+                                                    <div class="col-3">
+                                                        <div
+                                                            class="d-flex align-items-center justify-content-end edit_dlt_icon">
+                                                            <div><i class="bi bi-trash me-2"
+                                                                    style="cursor: pointer;"></i></div>
+                                                            <div><i class="bi bi-pen me-2" style="cursor: pointer;"></i>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Card Section row 9  -->
+                                <div class="row">
+                                    <div class="col-12 col-md-6 col-lg-4 col-xl-3 px-4 mb-2 py-2 each_card">
+                                        <div class=" shadow-sm rounded">
+                                            <div class="row">
+                                                <div
+                                                    class="d-flex align-items-center flex-wrap text-wrap card_section px-0 py-3">
+                                                    <div class="col-9">
+                                                        <div class="d-flex align-items-center">
+
+                                                            <div class="ms-3">
+                                                                <input type="checkbox" id="myCheckbox">
+                                                            </div>
+
+
+
+
+                                                            <div class="div ms-3">
+                                                                <img src="assets/github.png" alt="" height="40"
+                                                                    width="40">
+                                                            </div>
+
+                                                            <!-- Text section (Java Script) -->
+                                                            <div class="ms-2">
+                                                                <b>GitHub</b>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- Icons Section -->
+                                                    <div class="col-3">
+                                                        <div
+                                                            class="d-flex align-items-center justify-content-end edit_dlt_icon">
+                                                            <div><i class="bi bi-trash me-2"
+                                                                    style="cursor: pointer;"></i></div>
+                                                            <div><i class="bi bi-pen me-2" style="cursor: pointer;"></i>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12 col-md-6 col-lg-4 col-xl-3 px-4 mb-2 py-2 each_card">
+                                        <div class=" shadow-sm rounded">
+                                            <div class="row">
+                                                <div
+                                                    class="d-flex align-items-center flex-wrap text-wrap card_section px-0 py-3">
+                                                    <div class="col-9">
+                                                        <div class="d-flex align-items-center">
+
+                                                            <div class="ms-3">
+                                                                <input type="checkbox" id="myCheckbox">
+                                                            </div>
+
+
+
+
+                                                            <div class="div ms-3">
+                                                                <img src="assets/Confluence.png" alt="" height="40"
+                                                                    width="40">
+                                                            </div>
+
+                                                            <!-- Text section (Java Script) -->
+                                                            <div class="ms-2">
+                                                                <b>Confluence</b>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- Icons Section -->
+                                                    <div class="col-3">
+                                                        <div
+                                                            class="d-flex align-items-center justify-content-end edit_dlt_icon">
+                                                            <div><i class="bi bi-trash me-2"
+                                                                    style="cursor: pointer;"></i></div>
+                                                            <div><i class="bi bi-pen me-2" style="cursor: pointer;"></i>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12 col-md-6 col-lg-4 col-xl-3 px-4 mb-2 py-2 each_card">
+                                        <div class=" shadow-sm rounded">
+                                            <div class="row">
+                                                <div
+                                                    class="d-flex align-items-center flex-wrap text-wrap card_section px-0 py-3">
+                                                    <div class="col-9">
+                                                        <div class="d-flex align-items-center">
+
+                                                            <div class="ms-3">
+                                                                <input type="checkbox" id="myCheckbox">
+                                                            </div>
+
+
+
+
+                                                            <div class="div ms-3">
+                                                                <img src="assets/devops.jpg" alt="" height="40"
+                                                                    width="40">
+                                                            </div>
+
+                                                            <!-- Text section (Java Script) -->
+                                                            <div class="ms-2">
+                                                                <b>DevOps</b>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- Icons Section -->
+                                                    <div class="col-3">
+                                                        <div
+                                                            class="d-flex align-items-center justify-content-end edit_dlt_icon">
+                                                            <div><i class="bi bi-trash me-2"
+                                                                    style="cursor: pointer;"></i></div>
+                                                            <div><i class="bi bi-pen me-2" style="cursor: pointer;"></i>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12 col-md-6 col-lg-4 col-xl-3 px-4 mb-2 py-2 each_card">
+                                        <div class=" shadow-sm rounded">
+                                            <div class="row">
+                                                <div
+                                                    class="d-flex align-items-center flex-wrap text-wrap card_section px-0 py-3">
+                                                    <div class="col-9">
+                                                        <div class="d-flex align-items-center">
+
+                                                            <div class="ms-3">
+                                                                <input type="checkbox" id="myCheckbox">
+                                                            </div>
+
+
+
+
+                                                            <div class="div ms-3">
+                                                                <img src="assets/jenkins.jpg" alt="" height="40"
+                                                                    width="40">
+                                                            </div>
+
+                                                            <!-- Text section (Java Script) -->
+                                                            <div class="ms-2">
+                                                                <b>Jenkins</b>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- Icons Section -->
+                                                    <div class="col-3">
+                                                        <div
+                                                            class="d-flex align-items-center justify-content-end edit_dlt_icon">
+                                                            <div><i class="bi bi-trash me-2"
+                                                                    style="cursor: pointer;"></i></div>
+                                                            <div><i class="bi bi-pen me-2" style="cursor: pointer;"></i>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 d-flex justify-content-end">
+                <ul class="pagination">
+                    <li class="page-item">
+                        <a class="page-link rounded-circle p-1 px-2" href="#" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    <li class="page-item"><a class="page-link rounded-circle p-1 px-2" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link rounded-circle p-1 px-2" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link rounded-circle p-1 px-2" href="#">3</a></li>
+                    <li class="page-item"><a class="page-link rounded-circle p-1 px-2" href="#">4</a></li>
+                    <li class="page-item disabled">
+                        <a class="page-link rounded-circle p-1 px-2" href="#">…</a>
+                    </li>
+                    <li class="page-item"><a class="page-link rounded-circle  p-1 px-2" href="#">9</a></li>
+                    <li class="page-item">
+                        <a class="page-link rounded-circle p-1 px-2" href="#" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+
+
+
+
+
+
+
+
+        </div>
+
+        <!-- Offcanvas Sidebar for Mobile -->
+        <!-- Offcanvas Sidebar for Mobile -->
+        <div class="offcanvas offcanvas-start bg-light" tabindex="-1" id="mobileSidebar" style="width: 350px;">
+            <div class="mt-2 text-center">
+                <img src="assets/logo.png" alt="Logo" class="" height="50" width="120px"
+                    style="margin-left: -200px !important">
+            </div>
+            <div class="offcanvas-header">
+                <h5 class="offcanvas-title">Menu</h5>
+                <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"></button>
+            </div>
+            <div class="offcanvas-body" style="margin-left: -18px;">
+                <ul class="nav flex-column px-3">
+                    <li class="nav-item" style="margin-left: -8px;">
+                        <a class="nav-link" href="#">
+                            <i class="bi bi-grid-1x2 px-0"></i> Dashboard
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link d-flex align-items-center" href="#" id="teamDropdown1">
+                            <i class="bi bi-person me-2"></i> Team Member
+                            <i class="bi bi-chevron-down ms-auto"></i>
+                        </a>
+                        <ul class="list-unstyled ms-4 collapse" id="teamDropdownMenu1">
+                            <li class="nav-item">
+                                <a class="nav-link d-flex align-items-center" href="#">
+                                    <i class="bi bi-person me-2"></i> Team Member
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link d-flex align-items-center" href="#">
+                                    <i class="bi bi-award me-2"></i> Certification
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="bi bi-cast me-2"></i> Project
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="bi bi-person-badge me-2"></i> Client
+                        </a>
+                    </li>
+                    <li class="nav-item mt-1">
+                        <a class="nav-link d-flex align-items-center" href="#" id="learning_path_dropdown1">
+                            <i class="bi bi-person me-2"></i> Learning Path
+                            <i class="bi bi-chevron-down ms-auto"></i>
+                        </a>
+                        <ul class="list-unstyled ms-4 collapse" id="learning_path_dropdownMenu1">
+                            <li class="nav-item">
+                                <a class="nav-link d-flex align-items-center" href="#">
+                                    <i class="bi bi-person me-2"></i> Learning Path
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link d-flex align-items-center" href="#">
+                                    <i class="bi bi-award me-2"></i> Cources
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link d-flex align-items-center" href="#">
+                                    <i class="bi bi-award me-2"></i> Skills Sets
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+
+
+
+        <!-- Bootstrap JS -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>
+
+
+
+<script>
+
+
+    document.addEventListener("DOMContentLoaded", function () {
+        const dropdownToggle = document.getElementById("teamDropdown");
+        const dropdownMenu = document.getElementById("teamDropdownMenu");
+
+        dropdownToggle.addEventListener("click", function (e) {
+            e.preventDefault();
+            dropdownMenu.classList.toggle("collapse"); // Bootstrap class for expanding/collapsing
+        });
+    });
+
+    document.addEventListener("DOMContentLoaded", function () {
+        const dropdownToggle = document.getElementById("teamDropdown1");
+        const dropdownMenu = document.getElementById("teamDropdownMenu1");
+
+        dropdownToggle.addEventListener("click", function (e) {
+            e.preventDefault();
+            dropdownMenu.classList.toggle("collapse"); // Bootstrap class for expanding/collapsing
+        });
+    });
+
+    document.addEventListener("DOMContentLoaded", function () {
+        const dropdownToggle = document.getElementById("learning_path_dropdown");
+        const dropdownMenu = document.getElementById("learning_path_dropdownMenu");
+
+        dropdownToggle.addEventListener("click", function (e) {
+            e.preventDefault();
+            dropdownMenu.classList.toggle("collapse"); // Bootstrap class for expanding/collapsing
+        });
+    });
+
+    document.addEventListener("DOMContentLoaded", function () {
+        const dropdownToggle = document.getElementById("learning_path_dropdown1");
+        const dropdownMenu = document.getElementById("learning_path_dropdownMenu1");
+
+        dropdownToggle.addEventListener("click", function (e) {
+            e.preventDefault();
+            dropdownMenu.classList.toggle("collapse"); // Bootstrap class for expanding/collapsing
+        });
+    });
+
+</script>
